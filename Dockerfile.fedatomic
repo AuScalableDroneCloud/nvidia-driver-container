@@ -9,8 +9,8 @@ LABEL maintainer="Konstantinos Samaras-Tsakiris <kosamara@cern.ch>" \
       atomic.type="system" \
       architecture="x86_64"
 
-ARG KERNEL_VERSION=4.19.3-300.fc29.x86_64
-ARG NVIDIA_DRIVER_VERSION=430.50
+ARG KERNEL_VERSION=5.3.11-100.fc29.x86_64
+ARG NVIDIA_DRIVER_VERSION=440.59
 #ARG SELinux_ENABLED
 
 RUN dnf -y update
@@ -72,8 +72,8 @@ LABEL maintainer="Konstantinos Samaras-Tsakiris <kosamara@cern.ch>" \
       atomic.type="system" \
       architecture="x86_64" 
 
-ARG KERNEL_VERSION=4.15.4-300.fc27.x86_64
-ARG NVIDIA_DRIVER_VERSION=415.18
+ARG KERNEL_VERSION=5.3.11-100.fc29.x86_64
+ARG NVIDIA_DRIVER_VERSION=440.59
 
 RUN dnf -y update && \
     dnf -y install module-init-tools pciutils && \
