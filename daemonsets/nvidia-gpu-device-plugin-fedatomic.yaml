@@ -33,7 +33,7 @@ spec:
         hostPath:
           path: /dev
       initContainers:
-      - image: "docker.io/stackhpc/nvidia-driver-installer:29-5.3.11-100.fc29.x86_64-440.59
+      - image: "docker pull ghcr.io/auscalabledronecloud/nvidia-driver-container:fedora-atomic-29-5.1.20-200.fc29.x86_64-450.80.02"
         imagePullPolicy: Always
         name: nvidia-driver-installer
         resources:

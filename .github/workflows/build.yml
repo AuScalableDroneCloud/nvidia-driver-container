@@ -24,5 +24,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          tags: auscalabledronecloud/nvidia-driver-container:fedora-atomic-29
+          tags: auscalabledronecloud/nvidia-driver-container:fedora-atomic-29-5.1.20-200.fc29.x86_64-450.80.02
           file: ./Dockerfile.fedatomic 
+          push: true
+

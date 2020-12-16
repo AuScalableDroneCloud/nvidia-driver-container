@@ -9,8 +9,9 @@ LABEL maintainer="Konstantinos Samaras-Tsakiris <kosamara@cern.ch>" \
       atomic.type="system" \
       architecture="x86_64"
 
-ARG KERNEL_VERSION=5.3.11-100.fc29.x86_64
-ARG NVIDIA_DRIVER_VERSION=440.59
+#Must be the exact kernel version used in the kubernetes cluster node images
+ARG KERNEL_VERSION=5.1.20-200.fc29.x86_64
+ARG NVIDIA_DRIVER_VERSION=450.80.02
 #ARG SELinux_ENABLED
 
 RUN dnf -y update
@@ -72,8 +73,8 @@ LABEL maintainer="Konstantinos Samaras-Tsakiris <kosamara@cern.ch>" \
       atomic.type="system" \
       architecture="x86_64" 
 
-ARG KERNEL_VERSION=5.3.11-100.fc29.x86_64
-ARG NVIDIA_DRIVER_VERSION=440.59
+ARG KERNEL_VERSION=5.1.20-200.fc29.x86_64
+ARG NVIDIA_DRIVER_VERSION=450.80.02
 
 RUN dnf -y update && \
     dnf -y install module-init-tools pciutils && \
