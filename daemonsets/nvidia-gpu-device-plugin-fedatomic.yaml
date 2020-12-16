@@ -33,7 +33,7 @@ spec:
         hostPath:
           path: /dev
       initContainers:
-      - image: "ghcr.io/auscalabledronecloud/nvidia-driver-container:fedora-atomic-5.1.20-200.fc29.x86_64-450.80.02"
+      - image: "ghcr.io/auscalabledronecloud/nvidia-driver-container:fedora-coreos-5.6.11-200.fc31.x86_64-450.80.02"
         imagePullPolicy: Always
         name: nvidia-driver-installer
         resources:
