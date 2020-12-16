@@ -14,12 +14,15 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.ASDC_PACKAGES }}
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v2
         with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.ASDC_PACKAGES }}
-          registry: ghcr.io
-          repository: auscalabledronecloud/nvidia-driver-container
-          tag_with_ref: true
+          context: .
+          tags: auscalabledronecloud/nvidia-driver-container:fedora-atomic-29
           file: ./Dockerfile.fedatomic 
