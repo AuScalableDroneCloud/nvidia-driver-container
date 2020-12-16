@@ -1,9 +1,10 @@
 # Nvidia driver installer for Fedora Atomic
+#based on https://gitlab.cern.ch/cloud-infrastructure/nvidia-driver-container
 
 ARG FEDORA_VERSION=29
 
 FROM fedora:${FEDORA_VERSION} as kmod_builder
-LABEL maintainer="Konstantinos Samaras-Tsakiris <kosamara@cern.ch>" \
+LABEL maintainer="Owen Kaluza <owen.kaluza@monash.edu" \
       name="nvidia-driver-installer" \
       version="0.2" \
       atomic.type="system" \
@@ -29,7 +30,8 @@ RUN dnf -y install curl git binutils cpp gcc koji bc make pkgconfig pciutils unz
       kernel-headers-${KERNEL_VERSION}.rpm && \
     dnf clean all
 
-ENV NVIDIA_DRIVER_URL "http://download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_DRIVER_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_DRIVER_VERSION}.run"
+#ENV NVIDIA_DRIVER_URL "http://download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_DRIVER_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_DRIVER_VERSION}.run"
+ENV NVIDIA_DRIVER_URL "https://us.download.nvidia.com/tesla/${NVIDIA_DRIVER_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_DRIVER_VERSION}.run"
 
 ENV KERNEL_PATH /usr/src/kernels
 ENV NVIDIA_PATH /opt/nvidia
