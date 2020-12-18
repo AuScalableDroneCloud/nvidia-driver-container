@@ -98,10 +98,10 @@ RUN mkdir -p /lib/modules && \
 ENV PATH $PATH:${NVIDIA_BIN_PATH}
 ENV LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${NVIDIA_LIB_PATH}
 
-CMD depmod -a && \
-    modprobe -r nouveau; exit 0 && \
-    modprobe nvidia && \
-    modprobe nvidia-uvm && \
-    nvidia-mkdevs && \
-    cp -rfn ${NVIDIA_PATH}/bin /opt/nvidia-host && \
-    cp -rfn ${NVIDIA_PATH}/lib64 /opt/nvidia-host
+CMD depmod -a
+CMD modprobe -r nouveau
+CMD modprobe nvidia
+CMD modprobe nvidia-uvm
+CMD nvidia-mkdevs
+CMD cp -rfn ${NVIDIA_PATH}/bin /opt/nvidia-host
+CMD cp -rfn ${NVIDIA_PATH}/lib64 /opt/nvidia-host
