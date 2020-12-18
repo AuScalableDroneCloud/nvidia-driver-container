@@ -99,7 +99,7 @@ ENV PATH $PATH:${NVIDIA_BIN_PATH}
 ENV LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${NVIDIA_LIB_PATH}
 
 CMD depmod -a
-CMD modprobe -r nouveau
+#CMD modprobe -r nouveau
 CMD modprobe nvidia
 CMD modprobe nvidia-uvm
 CMD nvidia-mkdevs
