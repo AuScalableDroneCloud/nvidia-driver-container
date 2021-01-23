@@ -18,7 +18,7 @@ ARG NVIDIA_DRIVER_VERSION=367.134
 RUN dnf -y update
 
 RUN dnf -y install curl git binutils cpp gcc koji bc make pkgconfig pciutils unzip \
-      elfutils-libelf-devel openssl-devel module-init-tools && \
+      elfutils-libelf-devel openssl-devel module-init-tools patch && \
     dnf -y autoremove && \
     koji download-build --rpm --arch=x86_64 kernel-core-${KERNEL_VERSION} && \
     koji download-build --rpm --arch=x86_64 kernel-devel-${KERNEL_VERSION} && \
