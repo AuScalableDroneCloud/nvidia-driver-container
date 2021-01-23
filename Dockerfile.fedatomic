@@ -52,7 +52,6 @@ RUN ${NVIDIA_PATH}/download/nv_driver_installer.run \
       --kernel-source-path=/lib/modules/${KERNEL_VERSION}/build \
       --kernel-name=${KERNEL_VERSION} \
       --no-nvidia-modprobe \
-      --no-drm \
       --x-prefix=/usr \
       --no-install-compat32-libs \
       --installer-prefix=${NVIDIA_BUILD_PATH} \
@@ -62,6 +61,9 @@ RUN ${NVIDIA_PATH}/download/nv_driver_installer.run \
       #--force-selinux
       # NOTE: x-prefix is set to a different location,
       #   to simply skip those components and not include them in the installation
+
+#Do we need to patch driver for K2 for this kernel?
+#https://wiki.outscale.net/display/EN/Installing+an+NVIDIA+Driver+on+a+Linux+Instance
 
 RUN mkdir -p ${NVIDIA_BUILD_PATH}/lib/modules/ && \
     cp -rf /lib/modules/${KERNEL_VERSION} ${NVIDIA_BUILD_PATH}/lib/modules/${KERNEL_VERSION}
