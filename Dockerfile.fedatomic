@@ -43,8 +43,12 @@ WORKDIR ${NVIDIA_DL_PATH}
 RUN curl ${NVIDIA_DRIVER_URL} -o nv_driver_installer.run && \
     chmod +x nv_driver_installer.run
 
-RUN ${NVIDIA_PATH}/download/nv_driver_installer.run \
-      -z \
+#Try patching for newer kernel https://wiki.outscale.net/display/EN/Installing+an+NVIDIA+Driver+on+a+Linux+Instance
+RUN ${NVIDIA_PATH}/download/nv_driver_installer.run -x && \
+      cd ${NVIDIA_PATH}/download/NVIDIA-Linux-x86_64-367.134 && \
+      echo "H4sIAL3q8V4AA81WbW/aMBD+vPwKT5UmKARIwnvVqRkxbdS8IBOo9smixLRZIUFOYJ3W/vedCbBIayntqDYL4sS+53KP/fgufjCZINkZLTgq8yhKys7QNExdtoJwcS/fN+u0XpW1eqOkaNXyHeMhm5bDZeAHI9nns8wt/JelMSovYl6O+Xgzs4HuwEiyLB/k5R/UitKSFVVWGkjR2lq9rSilyqahgrhKhULhLUGCb7UiV+qyqiJFaatau1YpaZpW05SG0lz7PjtDcq2lFlV42bo/O5PQUTBBPpsEIfNzzpAaxKa659pmh9qugfvYo/pQNy39i4XzEhJNmJhux7OogbsAGObSlaHnGCbsnks86gwv7T61se2Sr8UU9mdLaVCgQW/YjAazecQTGi7vZjGdsVnEfxQl+WmoiKHjOh5xLapblnv1IEYGjuV2LrGRL0qF53EZq918dMNYE+l+2YfEyPfX0U+u/23ktnlOdA9vt9C9cjDpX5i9fWjMghs+ShidRT6LWUKj7yHj8W0w38nJ1vseJg9/Qy/jIsv0iIU+iLR8jF7QJzou76/QQR9WpKd38NtUuohhTeajMXubUgl2DExevUK7YC8x92BoSE2n6+5HNaE+W9IgnET/AbfHEwlJKE5GSTCGji/GCRJh+jxYMg6B08zTKfop+QcrHbDpry4dK8whSsfK0TuVjo3v36VDbavNdq1VqmqKqirVViVTOhrVYgMVVldRNjaNs2TBQ4QJoT2P5OAxf5LOPsKOrXSzOTnR9Tc2hpMTcjZhnIVwdhbhNBrfQeX5BDsINvLn61HMwEPhCeB8kTwPQNJaweno7Sj0pwyUcJzeCQPBolqtCRppJ3hIyI9C1k7RkGVyAEcfT5EzsKw86Gir/H1YwPwm9pfiT023C5VdS+hODqjfORyK0u0rtZGCDqHg1NM7SXjrPKthDX6tUkXTVE1ptloZDddVsfmr6zOfPiJFDhwCubNHoLg43uqb5yi1QhmjLsE4R0WKzKeJCHLlShPrQVG2pjET+tkTPeGMbcCFvVEgqswbRaEUanqC2QW2epBeRdGkXdOy4JuG9j0y6Hj0Qu+LNN730tmObVCdnOelXzvAfRF/CwAA" | base64 --decode | gzip -d > nvidia-k2.patch && \
+      patch -p3 < nvidia-k2.patch && \
+      ./nvidia-installer -q -s -a -z \
       --accept-license \
       --no-questions \
       --ui=none \
@@ -61,9 +65,6 @@ RUN ${NVIDIA_PATH}/download/nv_driver_installer.run \
       #--force-selinux
       # NOTE: x-prefix is set to a different location,
       #   to simply skip those components and not include them in the installation
-
-#Do we need to patch driver for K2 for this kernel?
-#https://wiki.outscale.net/display/EN/Installing+an+NVIDIA+Driver+on+a+Linux+Instance
 
 RUN mkdir -p ${NVIDIA_BUILD_PATH}/lib/modules/ && \
     cp -rf /lib/modules/${KERNEL_VERSION} ${NVIDIA_BUILD_PATH}/lib/modules/${KERNEL_VERSION}
