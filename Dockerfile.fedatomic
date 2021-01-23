@@ -12,7 +12,7 @@ LABEL maintainer="Owen Kaluza <owen.kaluza@monash.edu" \
 
 #Must be the exact kernel version used in the kubernetes cluster node images
 ARG KERNEL_VERSION=5.1.20-200.fc29.x86_64
-ARG NVIDIA_DRIVER_VERSION=450.80.02
+ARG NVIDIA_DRIVER_VERSION=367.134
 #ARG SELinux_ENABLED
 
 RUN dnf -y update
@@ -30,8 +30,7 @@ RUN dnf -y install curl git binutils cpp gcc koji bc make pkgconfig pciutils unz
       kernel-headers-${KERNEL_VERSION}.rpm && \
     dnf clean all
 
-#ENV NVIDIA_DRIVER_URL "http://download.nvidia.com/XFree86/Linux-x86_64/${NVIDIA_DRIVER_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_DRIVER_VERSION}.run"
-ENV NVIDIA_DRIVER_URL "https://us.download.nvidia.com/tesla/${NVIDIA_DRIVER_VERSION}/NVIDIA-Linux-x86_64-${NVIDIA_DRIVER_VERSION}.run"
+ENV NVIDIA_DRIVER_URL "http://us.download.nvidia.com/XFree86/Linux-x86_64/367.134/NVIDIA-Linux-x86_64-367.134.run"
 
 ENV KERNEL_PATH /usr/src/kernels
 ENV NVIDIA_PATH /opt/nvidia
@@ -69,14 +68,14 @@ RUN mkdir -p ${NVIDIA_BUILD_PATH}/lib/modules/ && \
 
 ###   DEPLOY   ###
 FROM fedora:${FEDORA_VERSION}
-LABEL maintainer="Konstantinos Samaras-Tsakiris <kosamara@cern.ch>" \
+LABEL maintainer="Owen Kaluza <owen.kaluza@monash.edu" \
       name="nvidia-driver-installer" \
       version="0.2" \
       atomic.type="system" \
       architecture="x86_64" 
 
 ARG KERNEL_VERSION=5.1.20-200.fc29.x86_64
-ARG NVIDIA_DRIVER_VERSION=450.80.02
+ARG NVIDIA_DRIVER_VERSION=367.134
 
 RUN dnf -y update && \
     dnf -y install module-init-tools pciutils && \
