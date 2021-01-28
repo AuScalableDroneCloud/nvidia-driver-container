@@ -19,7 +19,9 @@ mknod -m 666 /dev/nvidiactl c 195 255
 grep nvidia-uvm /proc/devices
 D=`grep nvidia-uvm /proc/devices | awk '{print $1}'`
 echo "D=" $D
-rm -f /dev/nvidia-uvm
-mknod -m 666 /dev/nvidia-uvm c $D 0
-
+if [ ! -z "$D" ];
+then
+  rm -f /dev/nvidia-uvm
+  mknod -m 666 /dev/nvidia-uvm c $D 0
+fi
 ls -ltr /dev/nv*
