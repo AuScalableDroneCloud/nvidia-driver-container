@@ -1,11 +1,8 @@
 #!/bin/bash
-ls -l ${NVIDIA_PATH}/usr/lib/modules/
-cp -rf ${NVIDIA_PATH}/usr/lib/modules/${KERNEL_VERSION}/video /lib/modules/${KERNEL_VERSION}
-ls -l /lib/modules/${KERNEL_VERSION}
-depmod -a || true
-modprobe -r nouveau || true
-modprobe nvidia
-modprobe nvidia-uvm
+#depmod -a || true
+#modprobe -r nouveau || true
+#modprobe nvidia
+#modprobe nvidia-uvm
 nvidia-mkdevs
 cp -rfn ${NVIDIA_PATH}/bin /opt/nvidia-host
 cp -rfn ${NVIDIA_PATH}/lib64 /opt/nvidia-host
