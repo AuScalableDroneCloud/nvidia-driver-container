@@ -1,6 +1,6 @@
 #!/bin/bash
 echo 1
-depmod -a || true
+#depmod -a || true
 echo 2
 modprobe -r nouveau || true
 echo 3
