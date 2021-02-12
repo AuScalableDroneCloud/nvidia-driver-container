@@ -12,3 +12,4 @@ nvidia-mkdevs
 echo 6
 cp -rfn ${NVIDIA_PATH}/bin /opt/nvidia-host
 cp -rfn ${NVIDIA_PATH}/lib64 /opt/nvidia-host
+ls -ltr /opt/nvidia-host

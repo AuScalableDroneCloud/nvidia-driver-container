@@ -11,7 +11,7 @@ LABEL maintainer="Owen Kaluza <owen.kaluza@monash.edu" \
       architecture="x86_64"
 
 ARG KERNEL_VERSION=5.7.16-200.fc32.x86_64
-ARG NVIDIA_DRIVER_VERSION=450.102.04
+ARG NVIDIA_DRIVER_VERSION=460.32.03
 ENV NVIDIA_DRIVER_VERSION=$NVIDIA_DRIVER_VERSION
 #ARG SELinux_ENABLED
 
@@ -74,7 +74,7 @@ LABEL maintainer="Owen Kaluza <owen.kaluza@monash.edu" \
       architecture="x86_64" 
 
 ARG KERNEL_VERSION=5.7.16-200.fc32.x86_64
-ARG NVIDIA_DRIVER_VERSION=450.102.04
+ARG NVIDIA_DRIVER_VERSION=460.32.03
 
 RUN dnf -y update && \
     dnf -y install module-init-tools pciutils && \
