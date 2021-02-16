@@ -86,7 +86,7 @@ spec:
       - image: nvidia/k8s-device-plugin:v0.8.1
         name: nvidia-device-plugin-ctr
         env:
-        - name: LD_LIBRARY_PATHR
+        - name: LD_LIBRARY_PATH
           value: "/opt/nvidia-driver/lib64"
         args: ["--fail-on-init-error=false"]
         securityContext:
