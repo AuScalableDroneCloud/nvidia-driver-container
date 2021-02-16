@@ -1,7 +1,11 @@
 name: Docker Image CI and publish
 
 on:
-  [push, workflow_dispatch]
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Dockerfile.fedatomic'
+      - 'scripts/**'
 #  pull_request:
 #  release:
 #    types: [published]
