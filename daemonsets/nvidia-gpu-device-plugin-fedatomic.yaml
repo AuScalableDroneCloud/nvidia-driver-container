@@ -85,13 +85,10 @@ spec:
       # https://github.com/NVIDIA/k8s-device-plugin/blob/master/nvidia-device-plugin.yml
       - image: nvidia/k8s-device-plugin:v0.8.1
         name: nvidia-device-plugin-ctr
-        command: ["/bin/bash", "-c"]
-        args:
-        - ls -ltr /opt/;
-        - export LD_LIBRARY_PATH=/opt/nvidia-driver/lib64/;
-        - nvidia-smi;
-        - nvidia-device-plugin --fail-on-init-error=false;
-        #args: ["--fail-on-init-error=false"]
+        env:
+        - name: LD_LIBRARY_PATHR
+          value: "/opt/nvidia-driver/lib64"
+        args: ["--fail-on-init-error=false"]
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
