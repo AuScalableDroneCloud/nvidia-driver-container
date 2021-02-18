@@ -83,20 +83,13 @@ spec:
 
       # See: (for updated device plugin section)
       # https://github.com/NVIDIA/k8s-device-plugin/blob/master/nvidia-device-plugin.yml
-      - image: nvidia/k8s-device-plugin:v0.8.1
+      - image: "k8s.gcr.io/nvidia-gpu-device-plugin@sha256:0842734032018be107fa2490c98156992911e3e1f2a21e059ff0105b07dd8e9e"
         name: nvidia-device-plugin-ctr
-        env:
-        - name: LD_LIBRARY_PATH
-          value: "/opt/nvidia-driver/lib64"
-        args: ["--fail-on-init-error=false"]
+        command: ["/usr/bin/nvidia-gpu-device-plugin", "-logtostderr", "-host-path=/opt/nvidia-driver"]
         securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop: ["ALL"]
+          privileged: true
         volumeMounts:
         - name: device-plugin
           mountPath: /var/lib/kubelet/device-plugins
         - name: dev
           mountPath: /dev
-        - name: nvidia-install-dir-host
-          mountPath: /opt/nvidia-driver
